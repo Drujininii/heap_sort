@@ -83,12 +83,14 @@ T Heap<T>::pop_max() {
     return temp;
 }
 
+
 template <class T>
 const T &Heap<T>::operator[](size_t number) {
     if (number >= heap_value.size())
         throw;
     return this->heap_value[number];
 }
+
 
 template <class K>
 std::ostream &operator<<(std::ostream &os, const Heap<K> &obj) {
@@ -102,6 +104,7 @@ template <class T>
 size_t Heap<T>::size_heap() {
     return heap_value.size();
 }
+
 
 bool open_file(std::string file_name, std::ifstream &is) {
     is.exceptions(std::ios::failbit);
@@ -168,11 +171,13 @@ void save_data(std::vector<int> sort_array) {
 }
 
 
+
 int main() {
     try {
         std::string file_name;
         std::ifstream is;
 
+        //блок чтения из файла
         if (!open_file(file_name, is))
             return 0;
 
@@ -181,6 +186,7 @@ int main() {
 
         read_file(is, data);
         is.close();
+        //конец блока чтения
 
         cout << "Исходный массив: " << endl;
 
@@ -189,7 +195,7 @@ int main() {
         }
         cout << endl;
 
-        Heap<int> obj(&data[0], data.size());
+        Heap<int> obj(&data[0], data.size());//создаем нашу кучу из элементов вектора
 
         cout << "Отсортированный массив: " << endl;
 
@@ -203,8 +209,8 @@ int main() {
         cout << endl;
 
         save_data(sort_array);
-
     }
+        
     catch(const std::runtime_error &s){
         std::cout << s.what() << std::endl;
         return EXIT_FAILURE;
