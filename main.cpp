@@ -149,6 +149,28 @@ void read_file(std::ifstream &is, std::vector<int> &data) {
 }
 
 
+void add_number(Heap<int> &obj) {
+    std::string choice;
+    int value = 0;
+    cin.clear();
+    while (true) {
+        cout << "Добавить еще число? (Y, N)" << endl;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        choice = (char)cin.get();
+        if (choice == "Y" || choice == "y") {
+            cout << "Введите число: " << endl;
+            cin >> value;
+            cin.clear();
+            obj.insert(value);
+            continue;
+        }
+        else if (choice == "N" || choice == "n") {
+            break;
+        }
+    }
+}
+
+
 void heap_sort(Heap<int> &obj, std::vector<int> &result) {
     size_t total_heap_elements = obj.size_heap();
     for (size_t i = 0; i < total_heap_elements; i++) {
@@ -196,6 +218,7 @@ int main() {
         cout << endl;
 
         Heap<int> obj(&data[0], data.size());//создаем нашу кучу из элементов вектора
+        add_number(obj);
 
         cout << "Отсортированный массив: " << endl;
 
@@ -210,7 +233,7 @@ int main() {
 
         save_data(sort_array);
     }
-        
+
     catch(const std::runtime_error &s){
         std::cout << s.what() << std::endl;
         return EXIT_FAILURE;
