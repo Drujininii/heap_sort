@@ -5,6 +5,7 @@
 #include <vector>
 #include <limits>
 #include <fstream>
+#include <cstring>
 
 
 using std::cout;
@@ -111,10 +112,12 @@ bool open_file(std::string file_name, std::ifstream &is) {
     while (true) {
         cout << "Введите имя файла (требуемый тип INT) или нажмите q для выхода" << endl;
         cin >> file_name;
+        char file_name_char[128];
+        strcpy(file_name_char, file_name.c_str());
         if (file_name == "q")
             return 0;
         try {
-            is.open(file_name);
+            is.open(file_name_char);
         }
         catch (std::ios_base::failure &e) { //есл не верное имя файла
             cout << "Caught an ios_base::failure." << endl
